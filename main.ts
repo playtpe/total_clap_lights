@@ -10,12 +10,21 @@ input.onButtonPressed(Button.A, function () {
 input.onSound(DetectedSound.Loud, function () {
     lightsOn = !(lightsOn)
     if (lightsOn) {
-        total += 1
+        if (reverse) {
+            total += -1
+        } else {
+            total += 1
+        }
         basic.showNumber(total)
     } else {
         basic.clearScreen()
     }
 })
+input.onButtonPressed(Button.B, function () {
+    reverse = !(reverse)
+    music.startMelody(music.builtInMelody(Melodies.Ringtone), MelodyOptions.Once)
+})
+let reverse = false
 let lightsOn = false
 let total = 0
 music.playSoundEffect(music.builtinSoundEffect(soundExpression.giggle), SoundExpressionPlayMode.UntilDone)
